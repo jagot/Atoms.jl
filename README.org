@@ -1,0 +1,8 @@
+#+TITLE: Atoms.jl
+#+AUTHOR: Stefanos Carlström
+#+EMAIL: stefanos.carlstrom@gmail.com
+
+[[https://travis-ci.org/jagot/Atoms.jl][https://travis-ci.org/jagot/Atoms.jl.svg?branch=master]]
+[[https://coveralls.io/github/jagot/Atoms.jl?branch=master][https://coveralls.io/repos/github/jagot/Atoms.jl/badge.svg?branch=master]]
+[[http://codecov.io/gh/jagot/Atoms.jl][http://codecov.io/gh/jagot/Atoms.jl/branch/master/graph/badge.svg]]
+
