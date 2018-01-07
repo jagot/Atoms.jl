@@ -6,3 +6,63 @@
 [[https://coveralls.io/github/jagot/Atoms.jl?branch=master][https://coveralls.io/repos/github/jagot/Atoms.jl/badge.svg?branch=master]]
 [[http://codecov.io/gh/jagot/Atoms.jl][http://codecov.io/gh/jagot/Atoms.jl/branch/master/graph/badge.svg]]
 
+#+PROPERTY: header-args:julia :session *julia-Atoms*
+
+A small package for quickly setting up [[https://github.com/jagot/MultiIndices.jl][MultIndices]] useful for
+computations with atoms (which are usually treated as spherically
+symmetric systems).
+
+Atomic data provided by https://github.com/andrejewski/periodic-table/.
+
+* Usage
+  #+BEGIN_SRC julia :exports code
+    using Atoms
+  #+END_SRC
+
+  #+RESULTS:
+  : nothing
+
+  Create an argon atom in the Breit–Pauli approximation, with a
+  maximum ℓ = 10:
+  #+BEGIN_SRC julia :exports both :results verbatim
+    Ar = BreitPauliAtom(:Ar, 10)
+  #+END_SRC
+
+  #+RESULTS:
+  : Atoms.BreitPauliAtom(MultiIndices.CopySpace{3,(1, 2, 3)}(MultiIndices.ProductSpace{2,(1, 2)}(MultiIndices.SumSpace{MultiIndices.RotationSpace}(MultiIndices.RotationSpace[Rot{ℓ = s}, Rot{ℓ = p}, Rot{ℓ = d}, Rot{ℓ = f}, Rot{ℓ = g}, Rot{ℓ = h}, Rot{ℓ = i}, Rot{ℓ = k}, Rot{ℓ = l}, Rot{ℓ = m}, Rot{ℓ = n}]), MultiIndices.Spin{1//2}()), 18), "Argon", [Ne]ᶜ 3s² 3p⁶, 18, 18)
+
+  The size of the tensor product space is
+  #+BEGIN_SRC julia :exports both :results verbatim
+    size(space(HeAr))
+  #+END_SRC
+
+  We can also create helium-like argon:
+  #+BEGIN_SRC julia :exports both :results verbatim
+    HeAr = BreitPauliAtom(:He, 10, Z=:Ar)
+  #+END_SRC
+
+  #+RESULTS:
+  : Atoms.BreitPauliAtom(MultiIndices.CopySpace{3,(1, 2, 3)}(MultiIndices.ProductSpace{2,(1, 2)}(MultiIndices.SumSpace{MultiIndices.RotationSpace}(MultiIndices.RotationSpace[Rot{ℓ = s}, Rot{ℓ = p}, Rot{ℓ = d}, Rot{ℓ = f}, Rot{ℓ = g}, Rot{ℓ = h}, Rot{ℓ = i}, Rot{ℓ = k}, Rot{ℓ = l}, Rot{ℓ = m}, Rot{ℓ = n}]), MultiIndices.Spin{1//2}()), 2), "Helium-like Argon", 1s², 2, 18)
+  
+  #+BEGIN_SRC julia :exports both :results verbatim
+    size(space(HeAr))
+  #+END_SRC
+
+  #+RESULTS:
+  : (121, 2, 2)
+
+  In the single-active electron approximation, with cylindrical
+  symmetry, we can do the following
+  #+BEGIN_SRC julia :exports both :results verbatim
+    ArSAE = SAEAtom2D(:Ar, 10)
+  #+END_SRC
+
+  #+RESULTS:
+  : Atoms.SAEAtom(MultiIndices.SumSpace{MultiIndices.RotationSpace}(MultiIndices.RotationSpace[Rot{ℓ = s}, Rot{ℓ = p, mmax=0}, Rot{ℓ = d, mmax=0}, Rot{ℓ = f, mmax=0}, Rot{ℓ = g, mmax=0}, Rot{ℓ = h, mmax=0}, Rot{ℓ = i, mmax=0}, Rot{ℓ = k, mmax=0}, Rot{ℓ = l, mmax=0}, Rot{ℓ = m, mmax=0}, Rot{ℓ = n, mmax=0}]), "Argon", [Ne]ᶜ 3s² 3p⁶, 18, 18)
+  
+  #+BEGIN_SRC julia :exports both :results verbatim
+    size(space(ArSAE))
+  #+END_SRC
+
+  #+RESULTS:
+  : 11
